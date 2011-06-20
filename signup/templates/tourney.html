@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div>{{tourney}}</div>
+    <div>{{tourney.rules}}</div>
+
+
+    <div>{{tourney.entrants.count}} of {{tourney.cutoff}} registered</div>
+
+
+    {% if tourney.entrants.count >= tourney.cutoff %}
+        <div>You will be registered as an alternate.</div>
+    {% endif %}
+
+
+{% endblock %}

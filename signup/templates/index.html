@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+    <script type="text/javascript">
+        $().ready(function() {
+            $("#signup").hide()
+            $("#sel_tournament").change(function() {
+                data = this.value;
+                if (isNaN(data)) {
+                    $("#signup").hide()
+                    return;
+                }
+                window.location = "/tourney/" + data;
+            });
+
+        });
+           
+
+    </script>
+
+{% endblock %}
+
+
+{% block content %}
+
+    {% if tourneys.count == 0 %}
+    <div>No tournaments configured</div>
+    {% else %}
+
+
+    <div><select id="sel_tournament">
+        <option>Select a tournament...</option>
+        {% for t in tourneys %}
+            <option value="{{t.id}}">{{t.name}}</option>
+        {% endfor %}
+    </select></div>
+
+    {% endif %}
+{% endblock %}
