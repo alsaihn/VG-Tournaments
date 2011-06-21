@@ -9,7 +9,7 @@ def home(request):
     tourneys = Tourney.objects.all()
     return render_to_response('index.html', RequestContext(request,{'tourneys': tourneys}))
 
-def get_tourney(request, pk):
+def signup(request, pk):
     tourney = Tourney.objects.get(pk=pk)
     if request.method == 'POST':
         form = EntrantForm(request.POST)
@@ -21,6 +21,7 @@ def get_tourney(request, pk):
         form = EntrantForm()
     return render_to_response('tourney.html', RequestContext(request,{'tourney': tourney, 'form': form}))
 
-def get_entrants(request, pk):    
+def get_tourney(request, pk):    
     tourney = Tourney.objects.get(pk=pk)
     return render_to_response('list.html', RequestContext(request,{'tourney': tourney}))
+

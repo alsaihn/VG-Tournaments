@@ -7,8 +7,13 @@
 
     <div>{{tourney.entrants.count}} of {{tourney.cutoff}} registered</div>
 
+    <div>Participants: </div>
     {% for e in tourney.entrants.all %}
-        <div>{{e}}</div>
+        <div>{{forloop.counter}}.  {{e}}</div>
+
+        {% if forloop.counter == 64 %}
+            <div>Alternates: </div>
+        {% endif %}
     {% endfor %}
 
 

@@ -1,3 +1,4 @@
+import random
 from django.db import models
 
 # Create your models here.
@@ -23,6 +24,12 @@ class Tourney(models.Model):
         if person in entrants or person in alternates:
             return True;
         return False;
+
+    def get_entrants(self):
+        return random.shuffle(self.entrants.all[:64])
+
+    def get_alternates(self):
+        return self.entrants.all[64:]
 
     def __unicode__(self):
         return self.name
