@@ -13,5 +13,9 @@
         <div>You will be registered as an alternate.</div>
     {% endif %}
 
+    <form action="/tourney/{{tourney.id}}/" method="post">{% csrf_token %}
+    {{form}}
+    <input type="submit" value="Submit" />
+    </form>
 
 {% endblock %}
