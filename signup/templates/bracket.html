@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div>{{tourney}}</div>
+
+	<div>Participants:</div>
+
+	{% for p in participants %}
+		<div>{{forloop.counter}}.  {{p.name}}</div>
+	{% endfor %}
+
+	<div>Alternates:</div>
+	{% for a in alternates %}
+		<div>{{forloop.counter}}.  {{a.name}}</div>
+	{% endfor %}
+
+{% endblock %}
