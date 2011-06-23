@@ -1,5 +1,17 @@
 {% extends "base.html" %}
 
+{% block head %}
+
+    <script type="text/javascript">
+        $().ready(function() {
+            $("#id_tourney_pk")[0].value = {{tourney.id}}
+        });
+
+
+    </script>
+
+{% endblock %}
+
 {% block content %}
 
     <div>{{tourney}}</div>
@@ -15,7 +27,7 @@
     {% endif %}
 
     <form action="/tourney/{{tourney.id}}/" method="post">{% csrf_token %}
-    {{form}}
+    {{form.as_p}}
     <input type="submit" value="Submit" />
     </form>
 
