@@ -13,6 +13,7 @@ urlpatterns = patterns('',
 
     url(r'^tourney/(?P<pk>\d+)/$', 'signup.views.signup'),
     url(r'^list/(?P<pk>\d+)/$', 'signup.views.get_tourney'),
+    url(r'^bracket/(?P<pk>\d+)/$', 'signup.views.get_bracket'),
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),

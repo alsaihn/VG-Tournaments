@@ -7,6 +7,7 @@ class Entrant(models.Model):
     name = models.CharField(max_length=255)
     badge_number = models.IntegerField()
     registered_on = models.DateTimeField(auto_now_add=True, editable=False)
+    wins = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.name

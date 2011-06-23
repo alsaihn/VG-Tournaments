@@ -4,14 +4,17 @@
 
     <div>{{tourney}}</div>
 
-
-    <div>{{tourney.entrants.count}} of {{tourney.cutoff}} registered</div>
+	{% if tourney.entrants.count > tourney.cutoff %}
+		<div>{{tourney.cutoff}} Registered</div>
+	{% else %}
+    	<div>{{tourney.entrants.count}} of {{tourney.cutoff}} Registered</div>
+    {% endif %}
 
     <div>Participants: </div>
     {% for e in tourney.entrants.all %}
-        <div>{{forloop.counter}}.  {{e}}</div>
+        <div>{{forloop.counter}}.  {{e}} {{e.registered_on|date:"l, g:i a"}}</div>
 
-        {% if forloop.counter == 64 %}
+        {% if forloop.counter == tourney.cutoff %}
             <div>Alternates: </div>
         {% endif %}
     {% endfor %}
