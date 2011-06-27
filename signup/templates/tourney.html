@@ -14,16 +14,22 @@
 
 {% block content %}
 
-    <div>{{tourney}}</div>
-    <div>{{tourney.entrants.count}} of {{tourney.cutoff}} registered</div>
+    <h2>{{tourney}}</h2>
 
-    <div>{{tourney.rules|safe}}</div>
+    <div style="">{{tourney.get_entrants.count}} Registered
+	    {% if tourney.has_alternate_list %}
+	    and {{tourney.get_alternates.count}} Alternates
+	    {% endif %}
+		<a href="/list/{{tourney.id}}/" target="_blank">View List</a>
+    </div>
+
+    <div style="padding-top:10px;">{{tourney.rules|safe}}</div>
 
 
-    <div>By signing up, you certify that you've read and will abide by the rules of this tournament.</div>
+    <div style="padding-top:10px; font-weight:bold;">By signing up, you certify that you've read and will abide by the rules of this tournament.</div>
 
     {% if tourney.entrants.count >= tourney.cutoff %}
-        <div>You will be registered as an alternate.</div>
+        <div  style="padding-top:10px;font-weight:bold;">You will be registered as an alternate.</div>
     {% endif %}
 
     <form action="/tourney/{{tourney.id}}/" method="post">{% csrf_token %}

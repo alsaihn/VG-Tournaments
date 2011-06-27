@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+    <script type="text/javascript">
+        $().ready(function() {
+			var redir = setInterval(function() {
+				window.location = "/tourney/{{pk}}/";
+			}, 2500)
+        });
+
+
+    </script>
+
+{% endblock %}
+
+{% block content %}
+
+	<h1>Success! You are signed up!</h1>
+
+{% endblock %}

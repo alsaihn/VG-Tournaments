@@ -30,10 +30,10 @@ class Tourney(models.Model):
         return False;
 
     def get_entrants(self):
-        return random.shuffle(self.entrants.all[:64])
+        return self.entrants.all()[:self.cutoff]
 
     def get_alternates(self):
-        return self.entrants.all[64:]
+        return self.entrants.all()[self.cutoff:]
 
     def __unicode__(self):
         return self.name

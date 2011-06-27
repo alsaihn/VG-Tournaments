@@ -20,10 +20,13 @@ def signup(request, pk):
         if form.is_valid():
             entrant = form.save()
             tourney.entrants.add(entrant)
-            return HttpResponseRedirect('/list/' + pk.__str__())
+            return HttpResponseRedirect('/success/' + tourney.id.__str__())
     else:
         form = EntrantForm()
     return render_to_response('tourney.html', RequestContext(request,{'tourney': tourney, 'form': form}))
+
+def signup_success(request, pk):
+    return render_to_response('signup-success.html', RequestContext(request, {'pk': pk}))
 
 def get_tourney(request, pk):    
     tourney = Tourney.objects.get(pk=pk)
@@ -34,12 +37,14 @@ def get_bracket(request, pk):
     max = tourney.entrants.aggregate(Max('wins'))
     max =  max['wins__max']
     
-    participants = tourney.entrants.all()[:tourney.cutoff]
-    alternates = tourney.entrants.all()[tourney.cutoff:]
+    participants = tourney.get_entrants()
+    alternates = tourney.get_alternates()
    
     p_list = []
     for p in participants:
     	person = {'id': p.id, 'name': p.name}
     	p_list.append(person)
+    	
+    random.shuffle(p_list)
     	
     return render_to_response('bracket.html', RequestContext(request,{'tourney': tourney, 'participants': p_list, 'alternates': alternates}))

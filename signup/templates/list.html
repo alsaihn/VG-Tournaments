@@ -2,22 +2,36 @@
 
 {% block content %}
 
-    <div>{{tourney}}</div>
+    <h2>{{tourney}}</h2>
 
 	{% if tourney.entrants.count > tourney.cutoff %}
-		<div>{{tourney.cutoff}} Registered</div>
+		<div style="font-face:bold;">{{tourney.cutoff}} Participants,
+		{{tourney.get_alternates.count}} Alternates
+		</div>
 	{% else %}
-    	<div>{{tourney.entrants.count}} of {{tourney.cutoff}} Registered</div>
+    	<div style="font-face:bold">{{tourney.entrants.count}} of {{tourney.cutoff}} Registered</div>
     {% endif %}
 
-    <div>Participants: </div>
+    <table style="float:left;" cellpadding=4>
+    <tr><th colspan=3>Participants</th></tr>
     {% for e in tourney.entrants.all %}
-        <div>{{forloop.counter}}.  {{e}} {{e.registered_on|date:"l, g:i a"}}</div>
+        {% if forloop.counter <= tourney.cutoff %}
 
-        {% if forloop.counter == tourney.cutoff %}
-            <div>Alternates: </div>
+			<tr style="font-size:1.1em;"><td>{{forloop.counter}}.</td><td>{{e}}</td><td> <td>{{e.registered_on|date:"l, g:i a"}}</td></tr>
+
         {% endif %}
+
     {% endfor %}
+
+	<table style="float:left;padding-left:10px;" cellpadding=4>
+    <tr><th colspan=3>Alternates</th></tr>
+    {% for e in tourney.get_alternates %}
+
+			<tr style="font-size:1.1em;"><td>{{forloop.counter}}.</td><td>{{e}}</td><td> <td>{{e.registered_on|date:"l, g:i a"}}</td></tr>
+
+
+    {% endfor %}
+
 
 
 {% endblock %}

@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^$', 'signup.views.home', name='home'),
 
     url(r'^tourney/(?P<pk>\d+)/$', 'signup.views.signup'),
+    url(r'^success/(?P<pk>\d+)/$', 'signup.views.signup_success'),
     url(r'^list/(?P<pk>\d+)/$', 'signup.views.get_tourney'),
     url(r'^bracket/(?P<pk>\d+)/$', 'signup.views.get_bracket'),
 

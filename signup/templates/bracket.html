@@ -2,15 +2,15 @@
 
 {% block content %}
 
-    <div>{{tourney}}</div>
+    <h2>{{tourney}}</h2>
 
-	<div>Participants:</div>
+	<div style="padding-bottom:5px;">Participants:</div>
 
 	{% for p in participants %}
-		<div>{{forloop.counter}}.  {{p.name}}</div>
+		<div>{{p.name}}</div>
 	{% endfor %}
 
-	<div>Alternates:</div>
+	<div style="padding-top:10px;padding-bottom:5px;">Alternates:</div>
 	{% for a in alternates %}
 		<div>{{forloop.counter}}.  {{a.name}}</div>
 	{% endfor %}
