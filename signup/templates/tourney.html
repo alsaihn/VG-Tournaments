@@ -2,6 +2,13 @@
 
 {% block head %}
 
+	<style type="text/css">
+		form {padding-left:20px;}
+		p label {display:inline-block;width:135px;}
+		#id_name {width:250px;}
+		#id_badge_number {width:75px;}
+	</style>
+
     <script type="text/javascript">
         $().ready(function() {
             $("#id_tourney_pk")[0].value = {{tourney.id}}
@@ -34,7 +41,7 @@
 
     <form action="/tourney/{{tourney.id}}/" method="post">{% csrf_token %}
     {{form.as_p}}
-    <input type="submit" value="Submit" />
+    <input type="submit" value="Sign Up" />
     </form>
 
 {% endblock %}

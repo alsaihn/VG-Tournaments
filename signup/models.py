@@ -20,6 +20,8 @@ class Tourney(models.Model):
     rules = models.TextField()
     cutoff = models.IntegerField()
     has_alternate_list = models.BooleanField(default=True)
+    active = models.BooleanField(default=True)
+    start_time = models.DateTimeField()
 
     entrants = models.ManyToManyField(Entrant, related_name='entrants', blank=True, null=True)
 
@@ -38,6 +40,15 @@ class Tourney(models.Model):
     def __unicode__(self):
         return self.name
 
+class Round(models.Model):
+    tourney = models.ForeignKey(Tourney)
+    index = models.IntegerField()
+    max_per_pod = models.IntegerField()
+
+class Pod(models.Model):
+    round = models.ForeignKey(Round)
+    entrants = models.ManyToManyField(Entrant, related_name='pod_entrants', blank=True, null=True)    
+    
 from django.forms import ModelForm
 
 class EntrantForm(ModelForm):
